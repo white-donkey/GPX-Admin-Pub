@@ -1,0 +1,21 @@
+.tab_nav_close_x {
+	margin-left: 10px;
+	border-radius: 12px;
+	width: 10px;
+	text-align: center;
+	display: inline-block;
+	border: 1px solid rgb(221, 221, 221);
+	font-size: 50%;
+	vertical-align: top;
+	color: black;
+	background-color: #e5e5e5;
+}
+
+.tab_nav_close_x:hover {
+	background-color: #777;
+	color: white;
+}
+
+.tab-content-edges {
+	border: 1px solid #dddddd;
+}

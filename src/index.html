@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
+
+	<style>
+    
+	.bar {
+	  fill: steelblue;
+	}
+
+	.bar:hover {
+	  fill: brown;
+	}
+
+	.axis--x path {
+	  display: none;
+	}
+
+	</style>
+	<link rel="stylesheet" href="./css/GPX-Admin.css" />
+	<link rel="stylesheet" href="./css/dialog.css" />
+	<link rel="stylesheet" href="./css/Tab_Ctrl.css" />
+	<link rel="stylesheet" href="./css/Side-Panel.css" />
+	<script type="text/javascript" src="./resources/icon_sym_meta.js"></script>
+	<script src="./js/GPX-Svg-Icons.js"></script>
+	<script src="./js/GPX-Admin.js"></script>
+	<script src="./js/GPX-Utils.js"></script>
+	<script src="./js/GPX-File.js"></script>
+	<script src="./js/GPX-GPX-File.js"></script>
+	<script src="./js/GPX-Tab.js"></script>
+	<script src="./js/GPX-Graph.js"></script>
+	<script src="./js/GPX-Data.js"></script>
+	<script src="./js/GPX-Merge.js"></script>
+	<script src="./js/GPX-G-Adm.js"></script>
+	<script src="./js/GPX-G-Adm-Read.js"></script>
+	<script src="./js/GPX-G-Adm-Write.js"></script>
+	<script src="./js/GPX-Settings.js"></script>
+	<script src="./js/AIS-Trk-Key.js"></script>
+	<script src="./js/GPX-MT-Trk.js"></script>
+	<script src="./js/dialog.js"></script>
+	<script src="./js/DOM-To-JSON.js"></script>
+	<script src="./js/admTemplate.js"></script>
+	<script src="./utils/utils.js"></script>
+	<script src="./utils/d3.js"></script>
+	<script src="./utils/Tab_Ctrl.js"></script>
+	<script src="./utils/Collapsible-Panel.js"></script>
+	<script src="./utils/Side-Panel.js"></script>
+	<script src="./js/index.js"></script>
+</head>
+
+<body onload=initApp()>
+	<!-- <svg width="960" height="500"></svg> -->
+	<div id="content_container" class="gpx-main-container" style="font-family:'Roboto', sans-serif; padding: 10px 5px 5px 5px; overflow:hidden;">
+		<div>
+			<label for="gpx_file_input" class="gpx_button gpx-top-bar-color" style="padding:6px 12px;">Choose files</label>
+			<input type="file" id="gpx_file_input" multiple>
+
+			<label for="merge_button" class="gpx_button gpx-top-bar-color" style="padding:6px 12px;">Merge GPX Files...</label>
+			<input type="button" id="merge_button" onclick="openMergeDialog()" style="display:none;"/>
+<!--
+			<input type="button" class="gpx_button" style="padding:6px 12px;font-size:16px;" id="merge_button" onclick="openMergeDialog()" value="Merge GPX Files..."/>
+		-->
+
+			<span id="file_cnt_indicator" class="gpx-top-bar-color" style="margin:10px 10px 10px 50px;">
+				0 files are open
+			</span>
+
+			<span style="float: right;">
+				<div id="gpx_settings_button" style="display:inline-block; padding-right:10px; margin-top:-7px; vertical-align:top;">
+					<div style="text-align:center;">
+						<svg fill="#314790" height="18px" width="18px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 472.615 472.615" xml:space="preserve">
+							<g>
+								<path d="M472.615,274.117V198.4l-55.335-9.255c-4.332-16.64-10.929-32.492-19.692-47.458L430.178,96l-53.563-53.563
+									l-45.686,32.591c-14.966-8.763-30.917-15.36-47.557-19.692L274.215,0H198.4l-9.157,55.335
+									c-16.64,4.332-32.591,10.929-47.557,19.692L96,42.437L42.437,96l32.591,45.686c-8.763,14.966-15.36,30.818-19.692,47.458L0,198.4
+									v75.717l55.335,9.255c4.332,16.64,10.929,32.591,19.692,47.557l-32.591,45.686L96,430.178l45.686-32.689
+									c14.966,8.862,30.917,15.458,47.557,19.791l9.157,55.335h75.815l9.157-55.335c16.64-4.332,32.591-10.929,47.557-19.791
+									l45.686,32.689l53.563-53.563l-32.591-45.686c8.763-14.966,15.36-30.917,19.692-47.557L472.615,274.117z M236.308,334.769
+									c-54.252,0-98.462-44.209-98.462-98.462c0-54.351,44.209-98.462,98.462-98.462s98.462,44.111,98.462,98.462
+									C334.769,290.56,290.56,334.769,236.308,334.769z"/>
+							</g>
+						</svg>
+					</div>
+					<div class="gpx-top-bar-color" style="font-size: 10px;">
+						Settings
+					</div>
+				</div>
+				<div class="gpx-top-bar-color" style="display: inline-block; font-size: 10px; padding: 5px 0px; vertical-align: top;">
+					Version 4.00
+				</div>
+			</span>
+		</div>
+		<div id="GPX_Tab_Containers"></div>
+	</div>
+</body>
+</html>

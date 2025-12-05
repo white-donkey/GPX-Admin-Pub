@@ -1,0 +1,104 @@
+.side-bar-top-menu {
+    color: black;
+    background: lightskyblue;
+    border-style: none;
+    border-bottom-style: solid;
+    border-width: 1px;
+    border-color:#e0e0e0;
+
+}
+
+.side-bar-menu-item {
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+.side-bar-even-submenu {
+    border-style: none;
+    color: black;
+    background: white;
+}
+
+.side-bar-odd-submenu {
+    border-style: none;
+    color: white;
+    background: #777;
+}
+
+.side-bar-menu-div {
+    display: inline-block;
+    border-style: none solid none none;
+    border-width: 3px;
+    border-color: #e0e0e0;
+    padding: 2px;
+    vertical-align: top
+}
+
+.side-bar-menu-container {
+    display: none;
+    width: 400px;
+    overflow-y: auto;
+}
+
+.side-bar-button {
+    display: inline-block;
+    font-weight: bold;
+    font-size: 1.5em;
+    padding-right: 10px;
+    border-color: #e0e0e0 !important;
+    border-width: 1px !important;
+    border-right: solid;
+}
+
+.side-bar-button-enabled {
+    color: white;
+}
+
+.side-bar-button-disabled {
+    color: #a0a0a0;
+}
+
+.side-bar-button-icon {
+    display:block;
+    text-align:center;
+}
+
+.side-bar-button-icon-dims {
+    height:32px;
+    width:32px;
+}
+
+.side-bar-button-label {
+    display:block;
+    text-align:center;
+    font-size:0.5em;
+    padding-top: 2px;
+}
+
+.side-bar-submenu-icon {
+    font-weight: bold;
+    padding-right: 8px;
+    padding-left: 10px;
+}
+
+.side-bar-submenu-icon-position {
+    position: relative;
+    display: inline-block;
+    top: 3px;
+    vertical-align: middle;
+}
+
+.side-bar-data-div {
+    display: inline-block;
+}
+
+.side-bar-data-container {
+    display: block;
+    overflow-y: hidden;
+    padding: 0px 10px 0px 10px;
+}
+.data-control-area {
+	/*padding: 5px 10px 5px 10px;*/
+	background: royalblue;
+	color: white;
+}
