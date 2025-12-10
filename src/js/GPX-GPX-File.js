@@ -362,6 +362,9 @@ function parseObject (obj) {
 				// to the merged file 
 				if ((!isARte)||(sub_obj.tag_name !== "time")) {
 					ret_obj[sub_obj.tag_name] = sub_obj.val;
+					if (sub_obj.tag_name === "ele") {
+						ret_obj["depth_mtrs"] = -1.0*sub_obj.val;
+					}
 				}
 			}
 		});
@@ -392,6 +395,9 @@ function parseObject (obj) {
 		}
 		else {
 			ret_obj[obj.tag_name] = obj.val;
+			if (obj.tag_name === "ele") {
+				ret_obj["depth_mtrs"] = -1.0*obj.val;
+			}
 		}
 	}
 

@@ -117,6 +117,37 @@ function findMatchingWaypoint (wpt, wptList) {
 
 ///////////////////////////////////////////////////////////////////////////////
 /** 
+ * @this {GPX_Tab}
+ * This function ... 
+ * memberof
+ * access private 
+ * param 
+ * return
+ */
+///////////////////////////////////////////////////////////////////////////////
+function refreshWaypointTable () {
+	// Make sure this tab is actually displaying something before refreshing it
+	if ((this.currDisplayedWptTableMeta !== undefined)&&(this.currDisplayedWptTableMeta !== null)&&
+		(this.tableContainer !== undefined)&&(this.tableContainer !== null)&&
+		(this.currentlyDisplayedWpts !== undefined)&&(this.currentlyDisplayedWpts !== null)) {
+		removeAllChildElements (this.tableContainer);
+		// Re-render waypoint table
+		var wptTableObject = thiis.renderWaypointTable (
+			this.currDisplayedWptTableMeta.tableId,
+			this.tableContainer,
+			this.currentlyDisplayedWpts,
+			this.currDisplayedWptTableMeta.showSpeed,
+			this.currDisplayedWptTableMeta.showTimestamp,
+			this.currDisplayedWptTableMeta.showDistance,
+			this.currDisplayedWptTableMeta.showWptMatch,
+			this.currDisplayedWptTableMeta.showDepth,
+			this.currDisplayedWptTableMeta.showTemp);
+	}
+}
+
+///////////////////////////////////////////////////////////////////////////////
+/** 
+ * @this {GPX_Tab}
  * This function ... 
  * memberof
  * access private 
@@ -212,18 +243,18 @@ function renderWaypointTable (id, panel_parent, wpts, showSpeed, showTimestamp, 
 			if (showReportedSpeed) {
 				disp_cell = addNodeToDOM ("td", disp_row, null, null, "text-align:left;");
 				if ((wpt.sog_rpt !== undefined)&&(wpt.sog_rpt !== null)) {
-					disp_cell.innerText = convertNmForDistanceUnits (wpt.sog_rpt/10.0, distUnitSetting);
+					disp_cell.innerText = convertNmForDistanceUnits (wpt.sog_rpt/10.0, distUnitSetting).toFixed(2);
 				}
 				else {
 					disp_cell.innerText = "?";
 				}
 			}
 			disp_cell = addNodeToDOM ("td", disp_row, null, null, "text-align:left;");
-			disp_cell.innerText = convertNmForDistanceUnits (wpt.sog_fmt, distUnitSetting);
+			disp_cell.innerText = convertNmForDistanceUnits (wpt.sog_fmt, distUnitSetting).toFixed(2);
 		}
 		if (showDistance) {
 			disp_cell = addNodeToDOM ("td", disp_row, null, null, "text-align:left;");
-			disp_cell.innerText = convertNmForDistanceUnits (wpt.dist_fmt, distUnitSetting)+" ("+convertNmForDistanceUnits (wpt.dist_cumu_fmt, distUnitSetting)+")";
+			disp_cell.innerText = convertNmForDistanceUnits (wpt.dist_fmt, distUnitSetting).toFixed(2)+" ("+convertNmForDistanceUnits (wpt.dist_cumu_fmt, distUnitSetting).toFixed(2)+")";
 		}
 		if (showDepth) {
 			disp_cell = addNodeToDOM ("td", disp_row, null, null, "text-align:left;");
@@ -645,16 +676,37 @@ function setPanelMaxHeights (gpx_meta) {
 function buildWaypointsMenu (gpx_meta, menu) {
 	let thiis = this;
     if ((gpx_meta.gpx.wpts !== undefined)&&(gpx_meta.gpx.wpts !== null)&&(gpx_meta.gpx.wpts.length > 0)) {
+		let displayedWptTableMeta = {
+				menuLabel: "Waypoints (count="+gpx_meta.gpx.wpts.length+")",
+				tableId: gpx_meta.fileId+"_wpt_table",
+				showSpeed: false,
+				showTimestamp: false,
+				showDistance: false,
+				showWptMatch: null,
+				showDepth: false,
+				showTemp: false
+			};
         menu.addMenuItem ({
-            label: "Waypoints (count="+gpx_meta.gpx.wpts.length+")",
+            label: displayedWptTableMeta.menuLabel,
             action: function () {
+				thiis.currDisplayedWptTableMeta = displayedWptTableMeta;
                 removeAllChildElements (thiis.tableContainer);
 				document.getElementById(thiis.file.gpx_meta.fileId+"_wpt_table_name").style.display="none";
                 menu.collapseMenu();
-				// Render waypoint table
-				var wptTableObject = thiis.renderWaypointTable (gpx_meta.fileId+"_wpt_table", thiis.tableContainer, gpx_meta.gpx.wpts, false, false, false, null, false, false);
 				thiis.currentlyDisplayedWpts = gpx_meta.gpx.wpts;
 				thiis.currentlyDisplayedWptsName = "Waypoints";
+
+				// Render waypoint table
+				var wptTableObject = thiis.renderWaypointTable (
+					thiis.currDisplayedWptTableMeta.tableId,
+					thiis.tableContainer,
+					thiis.currentlyDisplayedWpts,
+					thiis.currDisplayedWptTableMeta.showSpeed,
+					thiis.currDisplayedWptTableMeta.showTimestamp,
+					thiis.currDisplayedWptTableMeta.showDistance,
+					thiis.currDisplayedWptTableMeta.showWptMatch,
+					thiis.currDisplayedWptTableMeta.showDepth,
+					thiis.currDisplayedWptTableMeta.showTemp);
 				thiis.sideMenu.disableControlButton (thiis.graphIcon);
             }
         });
@@ -680,9 +732,20 @@ function buildRoutesMenu (gpx_meta, menu) {
             action: null
         });
         gpx_meta.gpx.rtes.forEach (function (rte, rte_index) {
+			let displayedWptTableMeta = {
+				menuLabel: rte.name+" (Total Dist.="+rte.total_dist_fmt+" NM)",
+				tableId: gpx_meta.fileId+"_rtept_table_"+rte_index,
+				showSpeed: false,
+				showTimestamp: false,
+				showDistance: true,
+				showWptMatch: gpx_meta.gpx.wpts,
+				showDepth: false,
+				showTemp: false
+			};
             menu.addMenuItem ({
-                label: rte.name+" (Total Dist.="+rte.total_dist_fmt+" NM)",
+                label: displayedWptTableMeta.menuLabel,
                 action: function () {
+					thiis.currDisplayedWptTableMeta = displayedWptTableMeta;
                     removeAllChildElements (thiis.tableContainer);
                     menu.collapseMenu();
 					let titleDiv = document.getElementById(thiis.file.gpx_meta.fileId+"_wpt_table_name");
@@ -691,9 +754,19 @@ function buildRoutesMenu (gpx_meta, menu) {
 					titleDiv.children[0].innerText="Route Name=";
 					//@ts-ignore Intellisense is wrong about this error
 					titleDiv.children[1].innerText=rte.name;
-					var rteTableObject = thiis.renderWaypointTable (gpx_meta.fileId+"_rtept_table_"+rte_index, thiis.tableContainer, rte.rtepts, false, false, true, gpx_meta.gpx.wpts, false, false);
 					thiis.currentlyDisplayedWpts = rte.rtepts;
 					thiis.currentlyDisplayedWptsName = rte.name;
+					
+					var rteTableObject = thiis.renderWaypointTable (
+						thiis.currDisplayedWptTableMeta.tableId,
+						thiis.tableContainer,
+						thiis.currentlyDisplayedWpts,
+						thiis.currDisplayedWptTableMeta.showSpeed,
+						thiis.currDisplayedWptTableMeta.showTimestamp,
+						thiis.currDisplayedWptTableMeta.showDistance,
+						thiis.currDisplayedWptTableMeta.showWptMatch,
+						thiis.currDisplayedWptTableMeta.showDepth,
+						thiis.currDisplayedWptTableMeta.showTemp);
 					thiis.sideMenu.disableControlButton (thiis.graphIcon);
                 }
             }, topRteMenu);
@@ -719,9 +792,20 @@ function buildTracksMenu (gpx_meta, menu) {
         });
         gpx_meta.gpx.trks.forEach (function (trk, trk_index) {
             let numpts = trk.trksegs[0].trkpts.length;
+			let displayedWptTableMeta = {
+				menuLabel: trk.name+" (Total Dist.="+trk.trksegs[0].trkpts[numpts-1].dist_cumu_fmt+" NM)",
+				tableId: gpx_meta.fileId+"_trkpt_table_"+trk_index,
+				showSpeed: true,
+				showTimestamp: true,
+				showDistance: true,
+				showWptMatch: null,
+				showDepth: true,
+				showTemp: true
+			};
             menu.addMenuItem ({
-                label: trk.name+" (Total Dist.="+trk.trksegs[0].trkpts[numpts-1].dist_cumu_fmt+" NM)",
+                label: displayedWptTableMeta.menuLabel,
                 action: function () {
+					thiis.currDisplayedWptTableMeta = displayedWptTableMeta;
                     removeAllChildElements (thiis.tableContainer);
 					menu.collapseMenu();
 					let titleDiv = document.getElementById(thiis.file.gpx_meta.fileId+"_wpt_table_name");
@@ -734,9 +818,19 @@ function buildTracksMenu (gpx_meta, menu) {
 					trk.trksegs.forEach (function (seg){
 						all_trkpts = all_trkpts.concat (seg.trkpts);
 					});
-					let trkTableObject = thiis.renderWaypointTable (gpx_meta.fileId+"_trkpt_table_"+trk_index, thiis.tableContainer, all_trkpts, true, true, true, null, true, true);
 					thiis.currentlyDisplayedWpts = all_trkpts;
 					thiis.currentlyDisplayedWptsName = trk.name;
+
+					let trkTableObject = thiis.renderWaypointTable (
+						thiis.currDisplayedWptTableMeta.tableId,
+						thiis.tableContainer,
+						thiis.currentlyDisplayedWpts,
+						thiis.currDisplayedWptTableMeta.showSpeed,
+						thiis.currDisplayedWptTableMeta.showTimestamp,
+						thiis.currDisplayedWptTableMeta.showDistance,
+						thiis.currDisplayedWptTableMeta.showWptMatch,
+						thiis.currDisplayedWptTableMeta.showDepth,
+						thiis.currDisplayedWptTableMeta.showTemp);
 					thiis.sideMenu.enableControlButton (thiis.graphIcon);
                 }
             }, topTrkMenu);
@@ -781,12 +875,16 @@ function openGraphDialog () {
 	this.wptTableNameDiv = null;
 	this.currentlyDisplayedWpts = null;
 	this.currentlyDisplayedWptsName = null;
+	this.currDisplayedWptTableMeta = null;
 
     this.displayGPX = function () {
 		return displayGPX.call (this);
 	};
 	this.renderWaypointTable = function (id, panel_parent, wpts, showSpeed, showTimestamp, showDistance, showWptMatch, showDepth, showTemp) {
 		return renderWaypointTable.call (this, id, panel_parent, wpts, showSpeed, showTimestamp, showDistance, showWptMatch, showDepth, showTemp);
+	};
+	this.refreshWaypointTable = function () {
+		return refreshWaypointTable.call (this);
 	};
 	this.drawWaypointsPanel = function (gpx_meta) {
 		return drawWaypointsPanel.call (this, gpx_meta);

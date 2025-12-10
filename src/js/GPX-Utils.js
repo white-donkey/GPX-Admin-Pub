@@ -674,8 +674,9 @@ function convertNmForDistanceUnits (val, setting) {
 		break;
 	case DSTU.NM:
 	default:
-		// Do nothing as the val should already be nautical miles
-		retVal = val;
+		// Do nothing (other than convert a possible string to a number) as the
+		// val should already be nautical miles
+		retVal = +val;
 		break;
 	}
 
@@ -699,8 +700,9 @@ function convertCForTempUnits (val, setting) {
 		break;
 	case TEMPU.CELS:
 	default:
-		// Do nothing as the val should already be celsius
-		retVal = val;
+		// Do nothing (other than convert a possible string to a number) as
+		// the val should already be celsius
+		retVal = +val;
 		break;
 	}
 
@@ -724,8 +726,9 @@ function convertMtrForDepthUnits (val, setting) {
 		break;
 	case DPTU.MTR:
 	default:
-		// Do nothing as the val should already be meters
-		retVal = val;
+		// Do nothing (other than convert a possible string to a number) as
+		// the val should already be meters
+		retVal = +val;
 		break;
 	}
 

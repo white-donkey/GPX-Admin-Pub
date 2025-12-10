@@ -325,6 +325,22 @@ function tabActivateCallback (index) {
  * return
  */
 ///////////////////////////////////////////////////////////////////////////////
+function refreshOpenWaypointTables () {
+	this.gpx_file_list.forEach (gpx_file => {
+		gpx_file.tab.refreshWaypointTable ();
+	});
+}
+
+///////////////////////////////////////////////////////////////////////////////
+/** 
+ * @this {GPX_Admin}
+ * This function ... 
+ * memberof
+ * access private
+ * param 
+ * return
+ */
+///////////////////////////////////////////////////////////////////////////////
 function GPX_Admin (display_units) {
 	var thiis = this;
 
@@ -374,6 +390,9 @@ function GPX_Admin (display_units) {
 	this.updateFileCountIndicator = function () {
 		return updateFileCountIndicator.call (this);
 	};
+	this.refreshOpenWaypointTables = function () {
+		return refreshOpenWaypointTables.call (this);
+	} 
 
 	// Hook up the resize event
 	window.addEventListener('resize', function () {

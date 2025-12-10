@@ -114,6 +114,8 @@ function closeTab (index) {
 
 	// Make sure this file has a tab open.  But still call the callback even
 	// if it doesn't
+	this.tabClosing_cb (index);
+	
 	if ((this.tabs[index] !== undefined)&&(this.tabs[index] !== null)) {
 		// First remove all the DOM stuff
 		removeAllChildElements (this.tabs[index].tab_nav);
@@ -152,8 +154,6 @@ function closeTab (index) {
 			this.active_tab = -1;
 		}
 	}
-
-	this.tabClosing_cb (index);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

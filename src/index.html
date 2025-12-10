@@ -58,8 +58,10 @@
 			<label for="gpx_file_input" class="gpx_button gpx-top-bar-color" style="padding:6px 12px;">Choose files</label>
 			<input type="file" id="gpx_file_input" multiple>
 
+			<!--
 			<label for="merge_button" class="gpx_button gpx-top-bar-color" style="padding:6px 12px;">Merge GPX Files...</label>
 			<input type="button" id="merge_button" onclick="openMergeDialog()" style="display:none;"/>
+			-->
 <!--
 			<input type="button" class="gpx_button" style="padding:6px 12px;font-size:16px;" id="merge_button" onclick="openMergeDialog()" value="Merge GPX Files..."/>
 		-->
@@ -84,12 +86,15 @@
 							</g>
 						</svg>
 					</div>
-					<div class="gpx-top-bar-color" style="font-size: 10px;">
+					<div class="gpx-top-bar-color" style="font-size: 13px;">
 						Settings
 					</div>
 				</div>
-				<div class="gpx-top-bar-color" style="display: inline-block; font-size: 10px; padding: 5px 0px; vertical-align: top;">
-					Version 4.00
+				<div id="pub_ver_div" class="gpx-top-bar-color" style="display: none; font-size: 13px; padding: 5px 0px; vertical-align: top;" >
+					Version 0.0.0
+				</div>
+				<div id="dev_ver_div" class="gpx-top-bar-color" style="display: none; font-size: 13px; padding: 5px 0px; vertical-align: top;" >
+					Version 0.0.0.002
 				</div>
 			</span>
 		</div>

@@ -156,6 +156,8 @@ function saveSettings () {
     if (this.cookiesAllowed) {
         localStorage.setItem (this.lclStoragePrefix+"settings", JSON.stringify (this.settings));
     }
+
+    gpxAdminInstance.refreshOpenWaypointTables();
 }
 
 ///////////////////////////////////////////////////////////////////////////////

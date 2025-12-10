@@ -29,12 +29,16 @@ function GPX_Wpt (name,lat,lon,time,sym,depth_mtrs,temp_c) {
     }
 	if ((depth_mtrs !== undefined) && (depth_mtrs !== null)) {
         this.depth_mtrs = depth_mtrs;
+		// depth_mtrs is a positive number from ADM files but ele from GPX files
+		// is negative.  The ele property shoudl always be negative and the 
+		// depth_mtrs property shoudl always be positive.  The reason ele should
+		// always be negative is because it is for below sea level values, which
+		// depths are.
+		this.ele = (-1.0*depth_mtrs).toFixed(2);
     }
 	if ((temp_c !== undefined) && (temp_c !== null)) {
 		this.temp_c = temp_c;
 	}
-
-	// TODO: Add depth and possibly temp these are used by route points and track points
 }
 
 ///////////////////////////////////////////////////////////////////////////////

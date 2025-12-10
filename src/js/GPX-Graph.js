@@ -61,7 +61,7 @@ function mouseMoveHandler (e, rg) {
             const bisect = d3.bisector(function(wpt) {
                 if (rg.gt.xAxis === G_X_AXIS.DIST) {
                     //@ts-ignore Not a real error with the version of d3 I am using
-                    return +wpt.dist_cumu_fmt;
+                    return +(convertNmForDistanceUnits (wpt.dist_cumu_fmt, thiss.distUnitSetting));
                 }
                 else if (rg.gt.xAxis === G_X_AXIS.TIME) {
                     //@ts-ignore Not a real error with the version of d3 I am using
@@ -225,7 +225,7 @@ function renderGraph (div, rg) {
 			.x(function(wpt) {
 				if (rg.gt.xAxis === G_X_AXIS.DIST) {
 					//@ts-ignore Not a real error with the version of d3 I am using
-					return rg.xAxis(+wpt.dist_cumu_fmt);
+					return rg.xAxis(+(convertNmForDistanceUnits (wpt.dist_cumu_fmt, thiss.distUnitSetting)));
 				}
 				else if (rg.gt.xAxis === G_X_AXIS.TIME) {
 					//@ts-ignore Not a real error with the version of d3 I am using

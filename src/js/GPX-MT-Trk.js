@@ -45,7 +45,7 @@ function aisTrkToGpxObjs (trkKey) {
 						}
 						else {
 							// Not yet supporting more than two deep
-							console.error ("Can't create track property.  The depth is nto supported");
+							console.error ("Can't create track property.  The depth is not supported");
 						}
 					}
 				}

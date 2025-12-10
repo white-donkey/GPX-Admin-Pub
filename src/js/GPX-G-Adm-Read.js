@@ -654,7 +654,7 @@ function admToGpx () {
 				thiis.grandparent.gpx_meta.rteNameMaxLen = rte.NAME.length;
 			}
 			rte.rtepts.forEach (function (rtept) {
-				r.addRtePt (new GPX_Wpt (rtept.NAME, rtept.LAT, rtept.LONG, rtept.TIMESTAMP, getSymNameFromADMSymNum (rtept.SYM), null, null));
+				r.addRtePt (new GPX_Wpt (rtept.NAME, rtept.LAT, rtept.LONG, rtept.TIMESTAMP, getSymNameFromADMSymNum (rtept.SYM), rtept.DEPTH_MTRS, rtept.TEMP_C));
 				if ((rtept.NAME !== undefined) && (rtept.NAME !== null) &&
 					(rtept.NAME.length > thiis.grandparent.gpx_meta.rteptNameMaxLen)) {
 					thiis.grandparent.gpx_meta.rteptNameMaxLen = rtept.NAME.length;
