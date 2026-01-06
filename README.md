@@ -70,6 +70,12 @@ GPX-Admin can save files to a local storage.  It can output either GPX or ADM fo
 3. After selecting the desired export type click the OK button.
 4. After clicking the OK button a standard file save dialog will open.  The dialog will be different depending on which operating system your browser is running in.  Enter the name and location to save the file.
 
+### Some notes on saving an ADM file for import into a chartplotter:
+* Garmin chartplotters will only support the 8.3 naming convention, which means a maximum length of 8 characters for the name followed by a period followed by a three character extension.  For legacy chartplotters the .3 part of the filename must be .ADM  If a file name is longer than 8 characters the chartplotter will fail to import the data.
+* The SD Card and it contents that you will use to import data into your chartplotter has a few restrictions.
+    * The maximum size of the card is likely much smaller than many cards made today.  Fro example, the Garmin GPSMap 72XX series can't read any cards larger than 32G bytes.  Refer to the manual for your chartplotter.
+    * There is a specific directory structure that must be followed for ADM file imports.  This includes an XML metadata file.  The simplest way to get this structure is to put an empty SD card into the chartplotter and perform an export of the existing data to the SD card.  You can then simply replace the ADM file in the USERDATA directory that the chartplotter created with the ADM file exported from GPX-Admin.  Another possible way to do it (although I haven't tried it so your mileage may vary) is to use the chartplotter to format the SD card.
+
 <a name="2.4-settings"/>
 
 ### 2.4 Settings
