@@ -5,13 +5,21 @@ To use the Web application please click here: [Google Sites GPX-Admin](https://g
 
 ##### Table of Contents
    [1. Introduction](#1-introduction)
+   
    [2. Usage](#2-usage)
+   
    [2.1 Opening and Closing files](#2.1-opening-and-closing-files)
+   
    [2.2 Navigation within the application](#2.2-navigation-within-the-application)
+   
    [2.3 Saving files](#2.3-saving-files)
+   
    [2.4 Settings](#2.4-settings)
+   
    [2.5 Using the graph](#2.5-using-the-graph)
+   
    [2.6 Offline use](#2.6-offline-use)
+   
    [3. Known issues](#3-known-issues)
 
 
