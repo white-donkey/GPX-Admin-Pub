@@ -41,6 +41,7 @@ To close a file click the "x" located in the upper right of the file's tab.  Thi
 
 <img src="Screenshot-Open-Close.jpg" alt="" width="800px" />
 The following file types are supported for opening.
+
 * GPX - A text file that follows the [GPX schema](https://www.topografix.com/gpx/1/1/).  This is the current standard used across navigation applications.
 * ADM - A binary file that is only supported by legacy Garmin chart plotters and the no longer supported, Windows only, Garmin HomePort application.
 * JSON - A text JSON (JavaScript Object Notation) file formatted to the model used by the MarineTraffic website.  This format is likely not useful for most users.  The expected format of the objects in this file are specific to an export of AIS track data from the MarineTraffic website.  MarineTraffic does not support export of this data, at least not in the free tier of their product.
