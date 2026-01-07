@@ -1,4 +1,4 @@
-# GPX-Admin Publish (Current version: 0.0.0 - Released 09-Dec-2025)
+# GPX-Admin Publish Instructions for Use (Current version: 0.0.0 - Released 09-Dec-2025)
 This is a reference repository for the released versions of GPX-Admin.  This repository is not intended for development even though it contains the full source.  The source is included for transparency into the application.
 
 To use the Web application please click here: [Google Sites GPX-Admin](https://gpx.marbleheadsailor.com) for the online version (internet connectivity required) or refer to the instructions in section [2.6 Offline use](#2.6-offline-use) for how to use the application while offline.
