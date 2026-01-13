@@ -325,9 +325,10 @@ function tabActivateCallback (index) {
  * return
  */
 ///////////////////////////////////////////////////////////////////////////////
-function refreshOpenWaypointTables () {
+function refreshUI () {
 	this.gpx_file_list.forEach (gpx_file => {
 		gpx_file.tab.refreshWaypointTable ();
+		gpx_file.tab.refreshMenuLabels ();
 	});
 }
 
@@ -390,8 +391,8 @@ function GPX_Admin (display_units) {
 	this.updateFileCountIndicator = function () {
 		return updateFileCountIndicator.call (this);
 	};
-	this.refreshOpenWaypointTables = function () {
-		return refreshOpenWaypointTables.call (this);
+	this.refreshUI = function () {
+		return refreshUI.call (this);
 	} 
 
 	// Hook up the resize event

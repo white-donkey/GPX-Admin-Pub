@@ -21,6 +21,8 @@ To use the Web application please click here: [Google Sites GPX-Admin](https://g
    [2.6 Offline use](#2.6-offline-use)
    
    [3. Known issues](#3-known-issues)
+   
+   [4. Release notes](#4-release-notes)
 
 
 <a name="1-introduction"/>
@@ -118,16 +120,20 @@ Some caveats to offline use:
 <a name="3-known-issues"/>
 
 ## 3. Known issues
-* Route distance in menu
-The distance for a route displayed in the menu ignores the selected distance setting and will only display the length of the route in nautical miles.
-* Track distance in menu
-The distance for a track displayed in the menu ignores the selected distance setting and will only display the length of the track in nautical miles.
 * Graph cursors on mobile devices
 Dragging the graph cursors when used on a mobile device (tablet or phone) does not work smoothly.  Tapping to position the cursor and dragging a small distance is possible.
 * Poor UI layout on small screens (i.e. phones)
 The application was not designed to be reactive.  Due to this the UI is not well laid out or scaled when used on phone.  The application is best used on a tablet (in landscape orientation) or laptop.
-* Not rendering waypoint symbols
-The waypoint symbols that are associated with a waypoint do not get rendered in the tables.  They are still in the GPX file and are maintained in an export to another file.
-* Time displayed in graphs
-The time displayed for the ticks in the X-axis of the graphs is displayed as seconds instead of a formatted date/time.
+
+<a name="4-release-notes"/>
+
+## 4. Release notes
+* **Version 0.1.0**
+Fixed the following defects:
+    * Route distance in menu ignores the selected distance setting and will only display the length of the route in nautical miles.
+    * Track distance in menu ignores the selected distance setting and will only display the length of the track in nautical miles.
+    * The waypoint symbols that are associated with a waypoint do not get rendered in the tables.
+    * The time displayed for the ticks in the X-axis of the graphs is displayed as seconds instead of a formatted date/time.
+* **Version 0.0.0**
+Initial release
 

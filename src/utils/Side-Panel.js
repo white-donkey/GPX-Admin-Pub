@@ -72,7 +72,7 @@ function renderLabel () {
     // use the same vertical space as the others
     this.menuLabelIcon.innerHTML = "<div style=\"height:24px;width:20px;\"></div>"
     this.menuLabelLabel = addNodeToDOM ("div", this.menuLabelContainer, null, null, "display:inline-block;");
-    this.menuLabelLabel.innerText = this.menuMeta.label;
+    this.setLabelText (this.menuMeta.label);
 
     if (this.menuMeta.action !== null) {
         this.menuLabelContainer.onclick = this.menuMeta.action;
@@ -88,6 +88,21 @@ function renderLabel () {
             }
         }
     }
+}
+
+///////////////////////////////////////////////////////////////////////////////
+/** 
+ * @this {Menu_Item}
+ * This function ... 
+ * memberof
+ * access private
+ * param 
+ * return
+ */
+///////////////////////////////////////////////////////////////////////////////
+function setLabelText (lbl) {
+    this.menuMeta.label = lbl;
+    this.menuLabelLabel.innerText = lbl;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -155,6 +170,9 @@ function collapseMenu () {
     }
     this.renderLabel = function () {
         return renderLabel.call (this);
+    }
+    this.setLabelText = function (lbl) {
+        return setLabelText.call (this, lbl);
     }
     this.expandMenu = function () {
         return expandMenu.call (this);

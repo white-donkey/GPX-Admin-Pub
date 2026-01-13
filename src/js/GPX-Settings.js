@@ -157,7 +157,7 @@ function saveSettings () {
         localStorage.setItem (this.lclStoragePrefix+"settings", JSON.stringify (this.settings));
     }
 
-    gpxAdminInstance.refreshOpenWaypointTables();
+    gpxAdminInstance.refreshUI();
 }
 
 ///////////////////////////////////////////////////////////////////////////////

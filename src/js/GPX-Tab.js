@@ -47,8 +47,13 @@ function renderWaypointSym (sym, icon_meta) {
 			var first_icon_num_in_file = parseInt(split_fn[0]);
 			var icon_top = (Math.trunc((icon_meta.num-first_icon_num_in_file)/8))*35;
 			var icon_left = ((icon_meta.num-first_icon_num_in_file)%8)*35;
-			ret_val = " <div style='width: 32px;height: 32px;overflow:hidden;position:relative;'> \
+			var iconBase64File = icon_meta.file.split(".")[0];
+			iconBase64File = iconBase64File.replace("-","_");
+			/*ret_val = " <div style='width: 32px;height: 32px;overflow:hidden;position:relative;'> \
 						<img style='position:absolute;top: -"+icon_top+"px;left: -"+icon_left+"px;margin: auto;background-color: hsl(0, 0%, 90%);transition: background-color 300ms;' src='./resources/"+icon_meta.file+"'> \
+						</div>";*/
+			ret_val = " <div style='width: 32px;height: 32px;overflow:hidden;position:relative;'> \
+						<img style='position:absolute;top: -"+icon_top+"px;left: -"+icon_left+"px;margin: auto;background-color: hsl(0, 0%, 90%);transition: background-color 300ms;' src='"+window[iconBase64File]+"'> \
 						</div>";
 		}
 		else {
@@ -731,9 +736,10 @@ function buildRoutesMenu (gpx_meta, menu) {
             label: "Routes (count="+gpx_meta.gpx.rtes.length+")",
             action: null
         });
+		let distUnitSetting = gpxAdminInstance.settings.getSetting ("distUnits");
         gpx_meta.gpx.rtes.forEach (function (rte, rte_index) {
 			let displayedWptTableMeta = {
-				menuLabel: rte.name+" (Total Dist.="+rte.total_dist_fmt+" NM)",
+				menuLabel: rte.name+" (Total Dist.="+convertNmForDistanceUnits (rte.total_dist_fmt, distUnitSetting).toFixed(2)+" "+distUnitSetting.abbr+")",
 				tableId: gpx_meta.fileId+"_rtept_table_"+rte_index,
 				showSpeed: false,
 				showTimestamp: false,
@@ -742,7 +748,7 @@ function buildRoutesMenu (gpx_meta, menu) {
 				showDepth: false,
 				showTemp: false
 			};
-            menu.addMenuItem ({
+            rte.menuItem = menu.addMenuItem ({
                 label: displayedWptTableMeta.menuLabel,
                 action: function () {
 					thiis.currDisplayedWptTableMeta = displayedWptTableMeta;
@@ -790,10 +796,11 @@ function buildTracksMenu (gpx_meta, menu) {
             label: "Tracks (count="+gpx_meta.gpx.trks.length+")",
             action: null
         });
+		let distUnitSetting = gpxAdminInstance.settings.getSetting ("distUnits");
         gpx_meta.gpx.trks.forEach (function (trk, trk_index) {
             let numpts = trk.trksegs[0].trkpts.length;
 			let displayedWptTableMeta = {
-				menuLabel: trk.name+" (Total Dist.="+trk.trksegs[0].trkpts[numpts-1].dist_cumu_fmt+" NM)",
+				menuLabel: trk.name+" (Total Dist.="+convertNmForDistanceUnits (trk.trksegs[0].trkpts[numpts-1].dist_cumu_fmt, distUnitSetting).toFixed(2)+" "+distUnitSetting.abbr+")",
 				tableId: gpx_meta.fileId+"_trkpt_table_"+trk_index,
 				showSpeed: true,
 				showTimestamp: true,
@@ -802,7 +809,7 @@ function buildTracksMenu (gpx_meta, menu) {
 				showDepth: true,
 				showTemp: true
 			};
-            menu.addMenuItem ({
+            trk.menuItem = menu.addMenuItem ({
                 label: displayedWptTableMeta.menuLabel,
                 action: function () {
 					thiis.currDisplayedWptTableMeta = displayedWptTableMeta;
@@ -836,6 +843,31 @@ function buildTracksMenu (gpx_meta, menu) {
             }, topTrkMenu);
         });
     }
+}
+
+///////////////////////////////////////////////////////////////////////////////
+/** 
+ * @this {GPX_Tab}
+ * This function ... 
+ * memberof
+ * access private 
+ * param 
+ * return
+ */
+///////////////////////////////////////////////////////////////////////////////
+function refreshMenuLabels () {
+	let distUnitSetting = gpxAdminInstance.settings.getSetting ("distUnits");
+	this.file.gpx_meta.gpx.rtes.forEach (function (rte, rte_index) {
+		if ((rte.menuItem !== undefined)&&(rte.menuItem !== null)) {
+			rte.menuItem.setLabelText (rte.name+" (Total Dist.="+convertNmForDistanceUnits (rte.total_dist_fmt, distUnitSetting).toFixed(2)+" "+distUnitSetting.abbr+")");
+		}
+	});
+    this.file.gpx_meta.gpx.trks.forEach (function (trk, trk_index) {
+		if ((trk.menuItem !== undefined)&&(trk.menuItem !== null)) {
+			let numpts = trk.trksegs[0].trkpts.length;
+			trk.menuItem.setLabelText (trk.name+" (Total Dist.="+convertNmForDistanceUnits (trk.trksegs[0].trkpts[numpts-1].dist_cumu_fmt, distUnitSetting).toFixed(2)+" "+distUnitSetting.abbr+")");
+		}
+	});
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -909,6 +941,9 @@ function openGraphDialog () {
 	};
 	this.buildTracksMenu = function (gpx_meta, sideMenu) {
 		return buildTracksMenu.call (this, gpx_meta, sideMenu);
+	};
+	this.refreshMenuLabels = function () {
+		return refreshMenuLabels.call (this);
 	};
 	this.openGraphDialog = function () {
 		return openGraphDialog.call (this);

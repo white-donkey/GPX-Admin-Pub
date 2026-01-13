@@ -182,9 +182,16 @@ function renderGraph (div, rg) {
 		}))
 		.range([ 0, rg.width ]);
 
-	svg.append("g")
-		.attr("transform", "translate(0," + rg.height + ")")
-		.call(d3.axisBottom(rg.xAxis));
+    if (rg.gt.xAxis === G_X_AXIS.DIST) {
+        svg.append("g")
+            .attr("transform", "translate(0," + rg.height + ")")
+            .call(d3.axisBottom(rg.xAxis));
+    }
+    else if (rg.gt.xAxis === G_X_AXIS.TIME) {
+        svg.append("g")
+            .attr("transform", "translate(0," + rg.height + ")")
+            .call(d3.axisBottom(rg.xAxis).tickFormat(d3.timeFormat("%d-%b-%Y %H:%M:%S")));
+    }
 
 	// Add Y axis
     var leftAxis = null;
