@@ -128,6 +128,9 @@ The application was not designed to be reactive.  Due to this the UI is not well
 <a name="4-release-notes"/>
 
 ## 4. Release notes
+* **Version 0.2.0**
+Fixed the following defect:
+    * GPX files could not be exported due to a new property in the object that needed to be ignored during exporting.
 * **Version 0.1.0**
 Fixed the following defects:
     * Route distance in menu ignores the selected distance setting and will only display the length of the route in nautical miles.

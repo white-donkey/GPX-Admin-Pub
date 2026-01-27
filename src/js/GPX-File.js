@@ -17,7 +17,8 @@ const GPX_IGNORE_NODES = [
 	"addTrk",
 	"addTrkSeg",
 	"addTrkPt",
-	"addRtePt"
+	"addRtePt",
+	"menuItem"
 ];
 const GPX_IGNORE_ATTRS = ["creator"];
 const INTERNAL_IGNORE_NODES = [
