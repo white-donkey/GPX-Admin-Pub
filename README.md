@@ -1,4 +1,4 @@
-# GPX-Admin Instructions for Use (Current version: 0.0.0 - Released 09-Dec-2025)
+# GPX-Admin Instructions for Use (Current version: 0.2.0 - Released 27-Jan-2026)
 This is a reference repository for the released versions of GPX-Admin.  This repository is not intended for development even though it contains the full source.  The source is included for transparency into the application.
 
 To use the Web application please click here: [Google Sites GPX-Admin](https://gpx.marbleheadsailor.com) for the online version (internet connectivity required) or refer to the instructions in section [2.6 Offline use](#2.6-offline-use) for how to use the application while offline.
@@ -128,15 +128,15 @@ The application was not designed to be reactive.  Due to this the UI is not well
 <a name="4-release-notes"/>
 
 ## 4. Release notes
-* **Version 0.2.0**
+* **Version 0.2.0 (27-Jan-2026)**
 Fixed the following defect:
     * GPX files could not be exported due to a new property in the object that needed to be ignored during exporting.
-* **Version 0.1.0**
+* **Version 0.1.0 (13-Jan-2026)**
 Fixed the following defects:
     * Route distance in menu ignores the selected distance setting and will only display the length of the route in nautical miles.
     * Track distance in menu ignores the selected distance setting and will only display the length of the track in nautical miles.
     * The waypoint symbols that are associated with a waypoint do not get rendered in the tables.
     * The time displayed for the ticks in the X-axis of the graphs is displayed as seconds instead of a formatted date/time.
-* **Version 0.0.0**
+* **Version 0.0.0 (09-Dec-2025)**
 Initial release
 
